@@ -1,0 +1,27 @@
+<!-- shared_cheese_list.html - info.freezr.demo.clickOnCheese5.EveryOnesCheese -->
+
+<div class="freezer_top_app_menu" id="adminFunctions">
+  <a href=".">Back To Game</a>
+  &nbsp;
+  <a href="my_cheese_list">See My Own Cheeses</a>
+</div>
+
+<div class="freezer_app_page_title">Choose A Shared Cheese</div> 
+
+    <p> You have {{results.length}} cheeses to choose from</p>
+    <div id="cheeses">
+      {{#results}}
+        <div class="cheese_holder not_chosen">
+          <span class="pictHolder">
+            <img class="cheeseImg" id="cheesepict_{{_id}}" >
+          </span>
+          <span>
+            uploaded by: {{_creator}} 
+            <br/>  id:{{_id}}
+          </span>
+        </div>
+      {{/results}}
+      {{^results}}
+        <li> Sorry, there are currently no cheese pictures </li>
+      {{/results}}
+    </div>

@@ -1,0 +1,52 @@
+/* cheese_list.css - info.freezr.demo.clickOnCheese5.EveryOnesCheese */
+
+.cheese_holder {
+	width: 300px;
+	height: 75px;
+	vertical-align: top;
+	overflow: hidden;
+	text-align: left;
+	border-radius: 10px;
+	padding:10px;
+	font-family: arial;
+	font-size: 12px;
+	margin: 20px;
+}
+
+.not_chosen {
+	background-color: #E8E8E8;
+}
+.chosen {
+	background-color: #989898 ;
+}
+
+.clickable{
+	background-color: gray;
+	border-radius: 5px;
+	padding: 5px;
+}
+.cheeseImg {
+	max-width: 65px;
+	max-height: 65px;
+}
+.pictHolder {
+	width:75px;
+	height:75px;
+	float:right;
+	overflow: hidden;
+    cursor: pointer;
+}
+.cheesebutt {
+	background-color: white;
+	cursor: pointer;
+	width: 120px;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 3px;
+}
+.unshared {
+	color:blue;		
+}
+.shared {
+	color:red;		
+}

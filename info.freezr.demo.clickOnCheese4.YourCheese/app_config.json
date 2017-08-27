@@ -1,0 +1,65 @@
+{
+	"meta": {
+		"app_name":"info.freezr.demo.clickOnCheese4.YourCheese",
+		"app_display_name":"Click On YOUR Cheese - File Demo",
+		"app_version": "01",
+		"only_use_collections_listed":false // true means only accept collections that are in the key list below
+
+	},
+
+	"pages": {
+		"index": {
+			"page_title":"Click on Cheese Game",
+			"html_file":"index.html",
+			"css_files": "index.css",
+			"script_files": ["index.js"]
+		}
+	},
+	
+	"collections": {
+		"scores": {
+			"strictly_Adhere_To_schema":true, // true means only accept field_names that are in the key list below
+			"make_data_id": {"manual":true},
+			"field_names":{ 
+				"score": {
+					"description":"Player Score",
+					"type": "integer",
+					"required":true				
+				}
+			}
+		}
+	},
+
+	"files": {
+		"do_not_allow":false, // true means do not acccept files
+		"post_data_html_id":"file", // the id of the posted file within the html foem sending the file.. defaults to "file"
+		"strictly_Adhere_To_schema":false, // true means only accept field_names that are in the key list below
+
+		"donot_auto_enumerate_duplicates":false, // other wise, there is an error in case of duplicates
+		"allowed_file_types": ["jpg","png","jpeg","JPG","PNG","JPEG"],
+		
+		"field_names": {
+			"name": {
+				"description":"Cheese Name",
+				"type": "string",
+				"required":false					
+			}
+		}
+
+	},
+
+	"permissions": {
+		"top_scores": {
+			"type":"db_query",
+			"description": "Player Top Scores",
+			"requestee_app": null, //uses app"s own name if null
+			"collection": "scores",
+			"permitted_fields":null,
+			"sort_fields": {"score":-1},  // only one can work
+			"max_count": 1,      // null is infinite
+			"return_fields": ["score","_creator","_date_Created"],
+			"sharable_groups": ["logged_in"]
+		}
+	}
+
+}

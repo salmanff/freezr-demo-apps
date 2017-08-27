@@ -1,0 +1,47 @@
+{
+	"meta": {
+		"app_name":"info.freezr.demo.clickOnCheese3.GreenCheesePermit",
+		"app_display_name":"Click On Green Cheese - Permit Demo",
+		"app_version": "01",
+		"only_use_collections_listed":true // true means only accept collections that are in the key list below
+	},
+
+	"pages": {
+		"index": {
+			"page_title":"Click on Green Cheese Game",
+			"html_file":"index.html",
+			"css_files": "index.css",
+			"script_files": ["index.js"]
+		}
+	},
+	
+
+	"collections": {
+		"scores": {
+			"strictly_Adhere_To_schema":true, // true means only accept field_names that are in the key list below
+			"make_data_id": {"manual":true},
+			"field_names":{ 
+				"score": {
+					"description":"Player Score",
+					"type": "integer",
+					"required":true
+				}
+			}
+		}
+	},
+
+	"permissions": {
+		"top_scores": {
+			"type":"db_query",
+			"description": "Player Top Scores",
+			"requestee_app": null, //uses app's own name if null
+			"collection": "scores",
+			"permitted_fields":null,
+			"sort_fields": {"score":-1},  // only one can work
+			"max_count": 1,      // null is infinite
+			"return_fields": ["score","_creator","_date_Created"],
+			"allowed_groups": "logged_in"
+		}
+	}
+
+}

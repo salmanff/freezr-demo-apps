@@ -1,0 +1,64 @@
+/* index.css - info.freezr.demo.clickOnCheese4.YourCheese */
+
+body {
+    font-family: Helvetica, Arial New, Arial;
+    font-size: 10pt;
+}
+
+
+.errorBox {
+    color: #800;
+}
+
+.fadingIn {
+	opacity:0.2;
+	transition: opacity 1s;
+	-webkit-transition: opacity 1s; /* Safari */
+}
+
+#cheesePict {
+	position: absolute;
+	top:100px;
+	left:100px;
+	width: 100px;
+	height:auto;
+    cursor: pointer;
+}
+
+.centered {
+	width:100%;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.stats_title {
+	width:130px;
+	float: left;
+}
+.new_item{
+	font-weight: bold;
+	color:red;
+
+} 
+.stats_box {
+	position: absolute;
+	left:5px;
+	bottom:5px;
+}
+.blueButt {
+	color:blue;
+	border:1px solid gray;
+	border-radius: 3px;
+	cursor: pointer;
+	width: 200px;
+	padding: 3px;
+}
+.bigFont {
+	font-size:18px;
+	font-weight: bold;
+}
+#uplaodContainer {
+	margin:5px;
+}
+#cheese_list {
+	cursor: pointer;
+}

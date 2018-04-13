@@ -22,13 +22,13 @@ freezr.initPageScripts = function() {
 	resetCheese();
 
 	document.addEventListener('click', function (evt) {
-		console.log('touch start '+evt.target.id);
+		//onsole.log('touch start '+evt.target.id);
 		handleClick(evt.target.id);
 	});
 
 	updateScoresFromDb();
 
-	freezr.perms.setFieldAccess(freezr.utils.testCallBack,"cheese_share");
+	//freezr.perms.setFieldAccess(freezr.utils.testCallBack,"cheese_share");
 
 }
 
@@ -44,7 +44,7 @@ var updateScoresFromDb = function() {
 
 var gotLatestScore = function(returnJson) {
 	returnJson = freezr.utils.parse(returnJson);
-	console.log("got latest data "+JSON.stringify(returnJson));
+	//onsole.log("got latest data "+JSON.stringify(returnJson));
 	if (!returnJson.error && returnJson.data && returnJson.data.results && returnJson.data.results.length>0) {document.getElementById("lastScore").innerHTML = ""+(returnJson.data.results[0].score);}
 	freezr.db.query(
 		{	'collection':'scores',
@@ -56,7 +56,7 @@ var gotLatestScore = function(returnJson) {
 } 
 var gotHighestScore = function(returnJson){
 	returnJson = freezr.utils.parse(returnJson);
-	console.log("got highest score data "+JSON.stringify(returnJson));
+	//onsole.log("got highest score data "+JSON.stringify(returnJson));
 	if (!returnJson.error && returnJson && returnJson.results && returnJson.results.length>0 && returnJson.results[0].score) {
 		var newTopScore = parseInt(returnJson.results[0].score);
 		top_score = Math.max(top_score,newTopScore);
@@ -66,7 +66,7 @@ var gotHighestScore = function(returnJson){
 }
 var gotAllTopScore = function(returnJson){
 	returnJson = freezr.utils.parse(returnJson);
-	console.log("got all top score data "+JSON.stringify(returnJson));
+	//onsole.log("got all top score data "+JSON.stringify(returnJson));
 	var scoreString = "Not Available"
 	if (returnJson && returnJson.results && returnJson.results.length>0 && returnJson.results[0].score) {
 		scoreString = '<b>'+returnJson.results[0].score + '</b>'+" by "+ returnJson.results[0]._creator+" on "+freezr.utils.longDateFormat(returnJson.results[0]._date_Created);
@@ -79,7 +79,7 @@ var gotAllTopScore = function(returnJson){
 var handleClick = function(targetId) {
 	clearTimeout(time_counter);
 	if (targetId == "cheesePict") {
-		console.log("score is "+score+" top "+top_score+" all_users_top_score "+all_users_top_score);
+		//onsole.log("score is "+score+" top "+top_score+" all_users_top_score "+all_users_top_score);
 		score = score + Math.floor((window.innerWidth*window.innerHeight)/50000);
 		document.getElementById("score").innerHTML = ""+(score);		
 		if (score>top_score) {top_score=score; document.getElementById("top_score").innerHTML = ""+(score);}
@@ -89,14 +89,13 @@ var handleClick = function(targetId) {
 		gameHasStarted=true;
 		resetCheese();
 	} else if (!gameHasStarted && targetId=="uploadPict") {
-		console.log("trying to uplaod");
 		var fileInput = document.getElementById('picture_file');
     	var file = (fileInput && fileInput.files)? fileInput.files[0]: null;
     	if (!fileInput || !file) {
       		document.getElementById('errorBox').innerHTML="Please upload a file first.";
       	} else {
         	freezr.db.upload(file, null, function(returndata) {
-        		console.log(returndata);
+        		//onsole.log(returndata);
         		returndata = JSON.parse(returndata);
         		if (returndata.error) showError(returndata.error)
         		else if (returndata.confirmed_fields._id) setUserCheesePict(returndata.confirmed_fields._id)
@@ -110,15 +109,14 @@ var handleClick = function(targetId) {
 
 
 var checkForUserPicts = function() {
-	console.log("checking for user piczs")
 	freezr.db.query({'collection':'chosen-cheese'}, function(returnJson) {
-		console.log(returnJson);
+		//onsole.log(returnJson);
 		returnJson = JSON.parse(returnJson);
 		if (!returnJson.error && returnJson.results && returnJson.results.length>0) setUserCheesePict(returnJson.results[0].pict_id, "cheese_share");
 	})
 }
 var setUserCheesePict = function(id_set, permission_name) {
-	console.log("settin pict "+id_set);
+	//onsole.log("settin pict "+id_set);
 	var cheesePict = document.getElementById('cheesePict');
 	cheesePict.src = freezr.utils.filePathFromId(id_set, {'permission_name':permission_name} );
 }
@@ -132,7 +130,7 @@ var resetCheese = function() {
 	theCheese.style["-webkit-transition-timing-function"] = ""
 
 	time_limit = time_limit*time_reduction_factor;
-	console.log("resetCheese - time_limit at "+time_limit)
+	//onsole.log("resetCheese - time_limit at "+time_limit)
 
 	setTimeout(function() {
 		if (score>0) {
@@ -153,9 +151,6 @@ var resetCheese = function() {
 		theCheese.style.left = Math.floor((window.innerWidth - 30)*leftFactor)+"px";
 		theCheese.style.top = Math.floor((window.innerHeight - 30)*topFactor) + "px";
 
-		console.log("win width "+window.innerWidth+" h "+window.innerHeight );
-		console.log("setting mouse at "+Math.floor((window.innerWidth - 30)*leftFactor)+"px"+" "+Math.floor((window.innerHeight - 30)*topFactor) + "px");
-
 
 	}, 30);
 
@@ -168,13 +163,11 @@ var timer_ran_out = function() {
 var missed_mouse = function (){ 
 	gameHasStarted=false;
 	clearTimeout(time_counter);
-	console.log("missed mouse ");
 	document.getElementById("errorBox").style.display="block";
 	document.getElementById("lastScore").innerHTML = ""+(score);
 
 	var dateNow = new Date().getTime();
-	console.log("Now posting score "+score+" date "+dateNow);
-
+	
 	hideError();
 	freezr.db.write({"score":score}, {collection:'scores'}, recordedScore);
 	
@@ -196,7 +189,7 @@ var hideError = function() {
 }
 
 var recordedScore = function(data) {
-	console.log("recordedScore got confirm back "+JSON.stringify(data));
+	//onsole.log("recordedScore got confirm back "+JSON.stringify(data));
   if (!data) {
     console.log("Could not connect to server");
   } else if (data.error) {

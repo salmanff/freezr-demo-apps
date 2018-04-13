@@ -22,7 +22,7 @@ freezr.initPageScripts = function() {
 		for (var i=0; i<pictList.length; i++) {
 			theId = pictList[i].id.slice(11);
 			if (freezr.utils.startsWith(pictList[i].id,'cheesepict')){
-				pictList[i].src = freezr.utils.filePathFromId(theId,{'permission_name':'cheesepict'});
+				pictList[i].src = freezr.utils.filePathFromId(theId,{'permission_name':'cheese_share'});
 				if (pictList[i].getAttribute("data-access") == "info.freezr.demo.clickOnCheese5.EveryOnesCheese/cheese_share") {
 					changeButtClass(theId, true)
 				}
@@ -34,7 +34,7 @@ freezr.initPageScripts = function() {
 
 var choosePict = function(targetId) {
 	var real_id=targetId.slice(11);
-	console.log("chose "+real_id);
+	//onsole.log("chose "+real_id);
 	freezr.db.write({"pict_id":real_id}, {collection:'chosen-cheese'}, chosePict);
 }
 var chosePict = function(return_json) {
@@ -54,8 +54,8 @@ var sharePict = function(target) {
 		var grant = (current_class=="cheesebutt unshared")? "grant":"deny";
 		target.className = "cheesebutt pending";
 		target.innerHTML = "..."
-		console.log("share "+real_id+" share? "+grant);
-		freezr.perms.setObjectAccess(shared, "cheese_share", real_id, {'shared_with_group':'logged_in', 'action':grant})
+		//onsole.log("share "+real_id+" share? "+grant);
+		freezr.perms.setObjectAccess("cheese_share", real_id, {'shared_with_group':'logged_in', 'action':grant}, shared)
 	}
 }
 var shared = function (return_json) {

@@ -32,7 +32,6 @@
 	"collections": {
 		"scores": {
 			"strictly_Adhere_To_schema":true, // true means only accept field_names that are in the key list below
-			"make_data_id": {"manual":true},
 			"field_names":{ 
 				"score": {
 					"description":"Player Score",
